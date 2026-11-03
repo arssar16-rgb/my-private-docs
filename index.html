@@ -47,7 +47,7 @@
           type="password"
           maxlength="6"
           inputmode="numeric"
-          placeholder="أدخل الرمز السري (الافتراضي: 1234)"
+          placeholder="أدخل الرمز السري (1407)"
           class="w-full text-center tracking-widest py-3 rounded-xl bg-slate-800 border border-slate-700 text-white text-lg font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
           required
         >
@@ -58,7 +58,7 @@
           فتح البوابة
         </button>
       </form>
-      <p id="lockError" class="text-xs text-rose-400 hidden">الرمز السري غير صحيح. (الرمز الافتراضي: 1234)</p>
+      <p id="lockError" class="text-xs text-rose-400 hidden">الرمز السري غير صحيح. (الرمز هو: 1407)</p>
     </div>
   </div>
 
@@ -113,4 +113,60 @@
       </div>
 
       <div class="relative max-w-3xl mx-auto">
-        <i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-emerald
+        <i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-emerald-600 dark:text-emerald-400 text-lg sm:text-xl pointer-events-none"></i>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="ابحث هنا عن أي ملف..."
+          class="w-full pr-14 pl-24 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-base sm:text-lg font-bold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900 transition shadow-inner"
+        >
+        <button
+          id="btnClearSearch"
+          type="button"
+          class="hidden absolute left-3.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-300 hover:bg-rose-200 text-xs font-extrabold transition"
+        >
+          مسح
+        </button>
+      </div>
+
+      <!-- Quick Search Tags -->
+      <div class="flex items-center justify-center gap-1.5 flex-wrap pt-1 max-w-3xl mx-auto">
+        <span class="text-xs font-bold text-slate-400 ml-1">الأكثر طلباً:</span>
+        <button type="button" data-quick-tag="الهوية" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الهوية الوطنية</button>
+        <button type="button" data-quick-tag="جواز" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">جواز السفر</button>
+        <button type="button" data-quick-tag="السيرة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">السيرة الذاتية</button>
+        <button type="button" data-quick-tag="العائلة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">كرت العائلة</button>
+        <button type="button" data-quick-tag="ايبان" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">آيبان الراجحي</button>
+        <button type="button" data-quick-tag="صك" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الصكوك</button>
+      </div>
+
+      <div id="categoryTabsContainer" class="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1 pt-3 border-t border-slate-100 dark:border-slate-800"></div>
+    </section>
+
+    <!-- Results Header -->
+    <div class="flex items-center justify-between px-1">
+      <div class="flex items-center gap-2">
+        <h2 id="currentCategoryTitle" class="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">جميع الملفات الشخصية</h2>
+        <span id="resultsCountBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">0 مستند</span>
+      </div>
+    </div>
+
+    <!-- Files Container -->
+    <section id="filesContainer"></section>
+
+    <!-- Empty State -->
+    <section id="emptyStateContainer" class="hidden bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-10 text-center space-y-3">
+      <div class="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center text-2xl mx-auto">
+        <i class="fa-solid fa-file-circle-question"></i>
+      </div>
+      <h3 class="text-base font-extrabold text-slate-800 dark:text-slate-100">لا توجد مستندات مطابقة للبحث</h3>
+      <button id="btnResetFilters" type="button" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-sm">
+        <span>عرض جميع المستندات</span>
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Add Document Modal -->
+  <div id="addFileModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl border border-slate-200 dark:border-slate-800 shadow

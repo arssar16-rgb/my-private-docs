@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة ملفاتي الشخصية — قوقل درايف</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            tajawal: ['Tajawal', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Tajawal', 'Inter', sans-serif; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(148, 163, 184, 0.45); border-radius: 9999px; }
+    .card-hover { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+    .card-hover:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200 antialiased selection:bg-emerald-500 selection:text-white">
+
+  <!-- Pin Code Protection Lock Screen -->
+  <div id="lockScreen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl max-w-md w-full text-center space-y-6 shadow-2xl">
+      <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mx-auto border border-emerald-500/20">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="space-y-2">
+        <h2 class="text-xl font-black text-white">بوابة ملفاتي الشخصية</h2>
+        <p class="text-xs text-slate-400">الرجاء إدخال الرمز السري للوصول إلى المستندات</p>
+      </div>
+      <form id="lockForm" class="space-y-4">
+        <input
+          id="pinInput"
+          type="password"
+          maxlength="6"
+          inputmode="numeric"
+          placeholder="أدخل الرمز السري (الافتراضي: 1234)"
+          class="w-full text-center tracking-widest py-3 rounded-xl bg-slate-800 border border-slate-700 text-white text-lg font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          required
+        >
+        <button
+          type="submit"
+          class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm transition shadow-lg shadow-emerald-600/20"
+        >
+          فتح البوابة
+        </button>
+      </form>
+      <p id="lockError" class="text-xs text-rose-400 hidden">الرمز السري غير صحيح. (الرمز الافتراضي: 1234)</p>
+    </div>
+  </div>
+
+  <!-- Top Header -->
+  <header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white text-xl shadow-md shadow-emerald-600/20 shrink-0">
+          <i class="fa-brands fa-google-drive"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-base sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">
+              بوابة ملفاتي الشخصية — قوقل درايف
+            </h1>
+            <span class="text-[11px] bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300/50 dark:border-emerald-700/50 px-2.5 py-0.5 rounded-full font-bold">
+              محمية وآمنة
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            استعراض فوري والفتح المباشر في قوقل درايف للآيفون والماك
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <button id="btnOpenAddModal" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-sm">
+          <i class="fa-solid fa-plus"></i>
+          <span>إضافة مستند</span>
+        </button>
+
+        <button id="btnLockPortal" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60 transition" title="قفل البوابة فوراً">
+          <i class="fa-solid fa-lock"></i>
+          <span class="hidden sm:inline">قفل</span>
+        </button>
+
+        <button id="btnThemeToggle" type="button" aria-label="تبديل الوضع الليلي" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-amber-400 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-sm transition">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 space-y-5 pb-28">
+
+    <!-- Search Section -->
+    <section class="bg-white dark:bg-slate-900 rounded-3xl border-2 border-emerald-500/30 dark:border-emerald-500/20 p-5 sm:p-7 shadow-md space-y-4">
+      <div class="text-center max-w-xl mx-auto space-y-1">
+        <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">ابحث عن مستندك وافتحه في درايف</h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">اكتب أي كلمة من اسم المستند (مثل: الهوية، جواز، السيرة، كرت العائلة، صك، ايبان)</p>
+      </div>
+
+      <div class="relative max-w-3xl mx-auto">
+        <i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-emerald

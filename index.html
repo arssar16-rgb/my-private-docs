@@ -47,7 +47,7 @@
           type="password"
           maxlength="6"
           inputmode="numeric"
-          placeholder="أدخل الرمز السري (1407)"
+          placeholder="أدخل الرمز السري"
           class="w-full text-center tracking-widest py-3 rounded-xl bg-slate-800 border border-slate-700 text-white text-lg font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
           required
         >
@@ -58,7 +58,7 @@
           فتح البوابة
         </button>
       </form>
-      <p id="lockError" class="text-xs text-rose-400 hidden">الرمز السري غير صحيح. (الرمز هو: 1407)</p>
+      <p id="lockError" class="text-xs text-rose-400 hidden">الرمز السري غير صحيح.</p>
     </div>
   </div>
 
@@ -79,20 +79,24 @@
             </span>
           </div>
           <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            استعراض فوري والفتح المباشر في قوقل درايف للآيفون والماك
+            معاينة فورية وفتح مباشر في درايف للآيفون والماك
           </p>
         </div>
       </div>
 
       <div class="flex items-center gap-2 flex-wrap">
-        <button id="btnOpenAddModal" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-sm">
-          <i class="fa-solid fa-plus"></i>
-          <span>إضافة مستند</span>
+        <button id="btnOpenFoldersModal" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition border border-slate-200 dark:border-slate-700">
+          <i class="fa-solid fa-folder-tree text-amber-500"></i>
+          <span>مجلدات درايف</span>
         </button>
 
-        <button id="btnLockPortal" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60 transition" title="قفل البوابة فوراً">
+        <button id="btnOpenAddModal" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-sm">
+          <i class="fa-solid fa-plus"></i>
+          <span>إضافة</span>
+        </button>
+
+        <button id="btnLockPortal" type="button" class="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60 flex items-center justify-center text-sm transition" title="قفل البوابة">
           <i class="fa-solid fa-lock"></i>
-          <span class="hidden sm:inline">قفل</span>
         </button>
 
         <button id="btnThemeToggle" type="button" aria-label="تبديل الوضع الليلي" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-amber-400 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-sm transition">
@@ -108,8 +112,8 @@
     <!-- Search Section -->
     <section class="bg-white dark:bg-slate-900 rounded-3xl border-2 border-emerald-500/30 dark:border-emerald-500/20 p-5 sm:p-7 shadow-md space-y-4">
       <div class="text-center max-w-xl mx-auto space-y-1">
-        <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">ابحث عن مستندك وافتحه في درايف</h2>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">اكتب أي كلمة من اسم المستند (مثل: الهوية، جواز، السيرة، كرت العائلة، صك، ايبان)</p>
+        <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">ابحث عن مستندك أو عاينه فوراً</h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">ابحث بالاسم، أو تصفح عبر الأقسام والمجلدات أدناه</p>
       </div>
 
       <div class="relative max-w-3xl mx-auto">
@@ -132,7 +136,7 @@
       <!-- Quick Search Tags -->
       <div class="flex items-center justify-center gap-1.5 flex-wrap pt-1 max-w-3xl mx-auto">
         <span class="text-xs font-bold text-slate-400 ml-1">الأكثر طلباً:</span>
-        <button type="button" data-quick-tag="الهوية" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الهوية الوطنية</button>
+        <button type="button" data-quick-tag="الهوية" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الهوية</button>
         <button type="button" data-quick-tag="جواز السفر" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">جواز السفر</button>
         <button type="button" data-quick-tag="السيرة الذاتية" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">السيرة الذاتية</button>
         <button type="button" data-quick-tag="كرت العائلة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">كرت العائلة</button>
@@ -167,7 +171,51 @@
 
   </main>
 
-  <!-- Add Document Modal -->
+  <!-- Modal 1: In-Page Document Preview Modal -->
+  <div id="previewModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col h-[85vh]">
+      <div class="px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900">
+        <div>
+          <h3 id="previewModalTitle" class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">معاينة المستند</h3>
+          <p id="previewModalMeta" class="text-xs text-slate-500"></p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a id="btnPreviewOpenDrive" href="#" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold">
+            <i class="fa-brands fa-google-drive ml-1"></i>فتح في درايف
+          </a>
+          <button id="btnClosePreviewModal" type="button" class="w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-rose-500 hover:text-white text-slate-600 flex items-center justify-center">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 bg-slate-100 dark:bg-slate-950 relative">
+        <iframe id="previewIframe" src="about:blank" class="w-full h-full border-0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Drive Folders Quick Access Modal -->
+  <div id="foldersModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-amber-100 dark:bg-amber-950/70 text-amber-600 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-slate-900 dark:text-white">مجلدات قوقل درايف الرئيسية</h3>
+            <p class="text-xs text-slate-500">تصفح أو افتح أي مجلد رئيسي مباشرة في درايف</p>
+          </div>
+        </div>
+        <button id="btnCloseFoldersModal" type="button" class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white flex items-center justify-center text-slate-500">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="foldersListContainer" class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[70vh] overflow-y-auto custom-scrollbar"></div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Add New Custom Document Modal -->
   <div id="addFileModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
       <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -211,7 +259,18 @@
   </div>
 
   <script>
-    const CORRECT_PIN = "1407"; // الرمز السري المعتمد
+    const CORRECT_PIN = "1407";
+
+    const DRIVE_FOLDERS = [
+      { id: '1mNK_aXO35_tSuLyyEsc906s-nm_nO9Oy', title: '02 - شخصي', category: 'وثائق شخصية ورسمية', icon: 'fa-id-card' },
+      { id: '1XsqiRmKf2MxZudVUOUu8NIY48cvL5jNV', title: 'شخصي_العمل', category: 'ملفات العمل والقرارات', icon: 'fa-briefcase' },
+      { id: '1RKueZqcJZUMwaoVLwLUYxZ_lT0VtVQxx', title: 'الدورات والشهادات التدريبية', category: 'الشهادات والدورات', icon: 'fa-award' },
+      { id: '1Rz87VN7i4y6DXKj45PC4kVgCU0h6DehO', title: 'أرشيف الشخصي والجامعة', category: 'الجامعة والأرشيف', icon: 'fa-graduation-cap' },
+      { id: '1rcaauPDYo5SHGPEAlx45CHxjOh6-yzyr', title: '04 - الأسرة والوكالات', category: 'وثائق الأسرة', icon: 'fa-people-roof' },
+      { id: '11w9Tw1YL-jeZMa5zsNP2eWvIMEkPLNG0', title: '03 - مالية وحسابات بنكية', category: 'المالية', icon: 'fa-wallet' },
+      { id: '1zdpB_1WYU1U6dj8fJsM9A-XBuWK8zU3w', title: '08 - عقارات وصكوك', category: 'العقارات', icon: 'fa-city' },
+      { id: '1naLpEgOeWkGdlKSxphfuYBljidH6yKqK', title: 'مغاسل روما الذهبية - شوران', category: 'العقارات', icon: 'fa-shop' }
+    ];
 
     const CATEGORIES = [
       { key: 'all', label: 'جميع الملفات', icon: 'fa-layer-group' },
@@ -226,44 +285,10 @@
     ];
 
     let filesData = [
-      // 1. وثائق شخصية ورسمية
-      { id: '1GlmTx0RLnrfvuPjJ8YaXQDT-6CMh00q_', title: 'الهوية الوطنية (الرسمية)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-28', pinned: true, tags: 'هوية وطنية' },
-      { id: '1BRwWSn7iSGCb-ULYe4A-AtwXn0_6S4qo', title: 'الهوية الوطنية — نسخة توكلنا', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-14', pinned: false, tags: 'توكلنا' },
+      { id: '1GlmTx0RLnrfvuPjJ8YaXQDT-6CMh00q_', title: 'الهوية الوطنية (الرسمية)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-28', pinned: true, tags: 'هوية وطنية احوال' },
       { id: '1g5h1C_0Bv17iew06clOVS8aL_SSdj9Bt', title: 'جواز السفر (صالح حتى 2031)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-30', pinned: true, tags: 'جواز سفر' },
-      { id: '1WaqClU61Mwof2BWDoW42OHacT1-nP6z7', title: 'رخصة القيادة', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-10-14', pinned: true, tags: 'رخصة قيادة' },
-      { id: '1EeKN4lm2FRLl58yIhvotmSqb3IVGYZ5T', title: 'السيرة الذاتية الجديدة (CV)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-21', pinned: true, tags: 'سيرة ذاتية' },
-      { id: '1VoGsrgK48Dw4OH5PsjaXcB7twEmbQSMJ', title: 'بطاقة تصنيف هيئة التخصصات الصحية', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-28', pinned: true, tags: 'هيئة التخصصات الصحية' },
-      { id: '187zQdgOmEHcwmMrEpS6cbxQ6pbsS4Tu9', title: 'وثيقة التخرج — إدارة مستشفيات', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-23', pinned: true, tags: 'وثيقة تخرج' },
-      { id: '1OYEtyCBfC-NEDfNKBfBw1Ue1C0DbchMg', title: 'كشف الدرجات الأكاديمي', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-23', pinned: false, tags: 'كشف درجات' },
-      { id: '1R6jTVSzTGDDQ_PRrLKx2sF-TzMfSx0mA', title: 'شهادة الإنعاش القلبي الرئوي (BLS)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-30', pinned: true, tags: 'bls' },
-      { id: '1WDAVVVtfBABCLJqQxZqiopjiJlTEpE-C', title: 'شهادة رخصة مهارات مكافحة العدوى (BICSL)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-23', pinned: true, tags: 'بكسل bicsl' },
-
-      // 2. ملفات العمل والقرارات
       { id: '15a9VV8-hh7bPqO7khu-uiLUWK-rEyfSb', title: 'وثيقة تأمين الأخطاء الطبية', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-10-27', pinned: true, tags: 'تأمين أخطاء طبية' },
-      { id: '1yW84NAmQqjFKOdlLmUTVKJdu2FPEHFe6', title: 'إقرار صرف بدل النفسية 2026', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-10-04', pinned: true, tags: 'بدل نفسي' },
-      { id: '1evzh8eIVqr9Ie8TouFBLGodIQtiPQfhB', title: 'قرار التعيين الرسمي', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-09-30', pinned: true, tags: 'قرار التعيين' },
-      { id: '1Ze1ma3iWHKwiJWOvy0oBYH4LukxIjv8Y', title: 'خطاب مباشرة العمل', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'مباشرة العمل' },
-      { id: '16IHoGVbauwJlXVqvNa6HYa1NbKvF9RMo', title: 'عقد العمل الرسمي', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-09-21', pinned: false, tags: 'عقد العمل' },
-      { id: '1iBEuj47jhEoHrIXnAG4dsEQNxbAnu8MW', title: 'شهادة الخبرة من التجمع الصحي', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2025-06-11', pinned: true, tags: 'شهادة خبرة' },
-
-      // 3. الشهادات والدورات
-      { id: '1JIlAzQTV_4siuOGnpTZ3wHM95DAAngGk', title: 'شهادة دورة التحول الوطني', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'دورة التحول الوطني' },
-      { id: '1OpuppgkVwC8ZqBwTUabdIup57iGxHMJN', title: 'شهادة دورة Code Red', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'code red' },
-
-      // 4. الجامعة والأرشيف
-      { id: '1IuhqV026tNjYslPXnQa-ENojU1L6nBL0', title: 'ملف مدمج: درجات + هوية + وثيقة', category: 'academic', folderName: 'جامعة الملك عبدالعزيز', type: 'pdf', date: '2026-09-21', pinned: true, tags: 'ملف مدمج' },
-      { id: '10VKi_8_r1KLY3vASbgWGCfRsJA8le98C', title: 'تصنيف صيدلة + إدارة مستشفيات', category: 'academic', folderName: 'جامعة الملك عبدالعزيز', type: 'pdf', date: '2026-09-21', pinned: false, tags: 'تصنيف صيدلة' },
-
-      // 5. الأسرة
       { id: '1X3FLCX0nOWRqyJCvkYXLNxWYTEmNQ0i0', title: 'سجل الأسرة (كرت العائلة)', category: 'family', folderName: '04 - الأسرة', type: 'image', date: '2026-09-24', pinned: true, tags: 'كرت العائلة' },
-      { id: '1WOTjBLj_-yYFtXW7uUaHKXoa_QdUhWTz', title: 'صك الوكالة الشرعية من الوالدة', category: 'family', folderName: '04 - الأسرة', type: 'pdf', date: '2026-10-03', pinned: true, tags: 'وكالة الوالدة' },
-
-      // 6. العقارات
-      { id: '16cDerV-5gi5yWtsckaezmMJ1Q38-PVNj', title: 'صك إلكتروني — بيت العمال', category: 'real_estate', folderName: '08 - عقارات', type: 'pdf', date: '2026-10-01', pinned: true, tags: 'صك بيت العمال' },
-      { id: '1v05bRNXRsgD_dUHyV1tahVgTn15zI13-', title: 'صك إلكتروني — بيت الدويمة', category: 'real_estate', folderName: '08 - عقارات', type: 'pdf', date: '2026-10-01', pinned: true, tags: 'صك الدويمة' },
-      { id: '1TMiGcd00zCQJStrDMXUSvv8piGfC2KNE', title: 'السجل التجاري — مغاسل روما الذهبية', category: 'real_estate', folderName: 'مغاسل روما', type: 'image', date: '2026-10-19', pinned: true, tags: 'مغاسل روما السجل التجاري' },
-
-      // 7. المالية
       { id: '1EsvnHUfGd2eApjbJgk_2o5N0ydWF8s0N', title: 'شهادة آيبان مصرف الراجحي الأساسي', category: 'finance', folderName: '03 - مالية', type: 'pdf', date: '2026-10-04', pinned: true, tags: 'ايبان الراجحي' }
     ];
 
@@ -292,6 +317,7 @@
 
       renderCategories();
       renderFiles();
+      renderFoldersList();
 
       document.getElementById('searchInput').addEventListener('input', (e) => {
         state.searchQuery = e.target.value;
@@ -306,11 +332,21 @@
         renderFiles();
       });
 
-      const modal = document.getElementById('addFileModal');
-      document.getElementById('btnOpenAddModal').addEventListener('click', () => modal.classList.remove('hidden'));
-      document.getElementById('btnCloseAddModal').addEventListener('click', () => modal.classList.add('hidden'));
-      document.getElementById('btnCancelAddFile').addEventListener('click', () => modal.classList.add('hidden'));
-      
+      // Modals
+      const addModal = document.getElementById('addFileModal');
+      document.getElementById('btnOpenAddModal').addEventListener('click', () => addModal.classList.remove('hidden'));
+      document.getElementById('btnCloseAddModal').addEventListener('click', () => addModal.classList.add('hidden'));
+      document.getElementById('btnCancelAddFile').addEventListener('click', () => addModal.classList.add('hidden'));
+
+      const foldersModal = document.getElementById('foldersModal');
+      document.getElementById('btnOpenFoldersModal').addEventListener('click', () => foldersModal.classList.remove('hidden'));
+      document.getElementById('btnCloseFoldersModal').addEventListener('click', () => foldersModal.classList.add('hidden'));
+
+      document.getElementById('btnClosePreviewModal').addEventListener('click', () => {
+        document.getElementById('previewModal').classList.add('hidden');
+        document.getElementById('previewIframe').src = 'about:blank';
+      });
+
       document.getElementById('addFileForm').addEventListener('submit', (e) => {
         e.preventDefault();
         const title = document.getElementById('newFileTitle').value;
@@ -320,7 +356,7 @@
         const id = idMatch ? idMatch[1] : ('custom_' + Date.now());
 
         filesData.unshift({ id, title, category, folderName: 'إضافة جديدة', type: 'pdf', date: new Date().toISOString().slice(0,10), pinned: true, tags: title, customUrl: idMatch ? null : url });
-        modal.classList.add('hidden');
+        addModal.classList.add('hidden');
         renderFiles();
         showToast('تمت الإضافة بنجاح');
       });
@@ -339,6 +375,55 @@
       state.activeCategory = key;
       renderCategories();
       renderFiles();
+    }
+
+    function renderFoldersList() {
+      document.getElementById('foldersListContainer').innerHTML = DRIVE_FOLDERS.map(f => `
+        <div class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center shrink-0">
+              <i class="fa-solid ${f.icon}"></i>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">${f.title}</h4>
+              <p class="text-[11px] text-slate-500">${f.category}</p>
+            </div>
+          </div>
+          <a href="https://drive.google.com/drive/folders/${f.id}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold shrink-0">
+            فتح المجلد
+          </a>
+        </div>
+      `).join('');
+    }
+
+    window.previewFile = function(id) {
+      const file = filesData.find(f => f.id === id);
+      if (!file) return;
+      const viewUrl = file.customUrl || ('https://drive.google.com/file/d/' + file.id + '/view?usp=drivesdk');
+      const previewUrl = 'https://drive.google.com/file/d/' + file.id + '/preview';
+      
+      document.getElementById('previewModalTitle').textContent = file.title;
+      document.getElementById('previewModalMeta').textContent = file.folderName;
+      document.getElementById('btnPreviewOpenDrive').href = viewUrl;
+      document.getElementById('previewIframe').src = previewUrl;
+      document.getElementById('previewModal').classList.remove('hidden');
+    }
+
+    window.toggleFav = function(id) {
+      const file = filesData.find(f => f.id === id);
+      if (file) {
+        file.pinned = !file.pinned;
+        renderFiles();
+        showToast(file.pinned ? 'تمت الإضافة للمفضلة ⭐' : 'تمت الإزالة من المفضلة');
+      }
+    }
+
+    window.sendWa = function(id) {
+      const file = filesData.find(f => f.id === id);
+      if (!file) return;
+      const viewUrl = file.customUrl || ('https://drive.google.com/file/d/' + file.id + '/view?usp=drivesdk');
+      const msg = encodeURIComponent(`السلام عليكم، مرفق مستند: *${file.title}*\n🔗 رابط الاستعراض:\n${viewUrl}`);
+      window.open(`https://wa.me/?text=${msg}`, '_blank');
     }
 
     function renderFiles() {
@@ -368,23 +453,31 @@
           <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm flex flex-col justify-between gap-3 card-hover">
             <div>
               <div class="flex items-start justify-between gap-2">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-10 h-10 rounded-2xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-lg">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <div class="w-10 h-10 rounded-2xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-lg shrink-0">
                     <i class="fa-solid fa-file-pdf"></i>
                   </div>
-                  <div>
-                    <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                  <div class="min-w-0">
+                    <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 truncate">
                       ${f.folderName}
                     </span>
                   </div>
                 </div>
+                <button type="button" onclick="toggleFav('${f.id}')" class="text-lg ${f.pinned ? 'text-amber-400' : 'text-slate-300'}">
+                  <i class="fa-solid fa-star"></i>
+                </button>
               </div>
               <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mt-3 line-clamp-2">${f.title}</h3>
             </div>
-            <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
-              <a href="${viewUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition shadow-sm">
-                <i class="fa-brands fa-google-drive text-sm"></i>
-                <span>فتح ومشاركة من درايف</span>
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1.5">
+              <button type="button" onclick="previewFile('${f.id}')" class="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center gap-1 transition">
+                <i class="fa-regular fa-eye"></i><span>معاينة</span>
+              </button>
+              <button type="button" onclick="sendWa('${f.id}')" class="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1 transition">
+                <i class="fa-brands fa-whatsapp"></i><span>واتساب</span>
+              </button>
+              <a href="${viewUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center justify-center gap-1 transition">
+                <i class="fa-brands fa-google-drive"></i><span>درايف</span>
               </a>
             </div>
           </div>

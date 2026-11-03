@@ -133,9 +133,9 @@
       <div class="flex items-center justify-center gap-1.5 flex-wrap pt-1 max-w-3xl mx-auto">
         <span class="text-xs font-bold text-slate-400 ml-1">الأكثر طلباً:</span>
         <button type="button" data-quick-tag="الهوية" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الهوية الوطنية</button>
-        <button type="button" data-quick-tag="جواز" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">جواز السفر</button>
-        <button type="button" data-quick-tag="السيرة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">السيرة الذاتية</button>
-        <button type="button" data-quick-tag="العائلة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">كرت العائلة</button>
+        <button type="button" data-quick-tag="جواز السفر" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">جواز السفر</button>
+        <button type="button" data-quick-tag="السيرة الذاتية" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">السيرة الذاتية</button>
+        <button type="button" data-quick-tag="كرت العائلة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">كرت العائلة</button>
         <button type="button" data-quick-tag="ايبان" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">آيبان الراجحي</button>
         <button type="button" data-quick-tag="صك" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الصكوك</button>
       </div>
@@ -169,4 +169,237 @@
 
   <!-- Add Document Modal -->
   <div id="addFileModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl border border-slate-200 dark:border-slate-800 shadow
+    <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <h3 class="text-base font-black text-slate-900 dark:text-white">إضافة مستند جديد للبوابة</h3>
+        <button id="btnCloseAddModal" type="button" class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="addFileForm" class="p-5 space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">اسم المستند *</label>
+          <input id="newFileTitle" type="text" required placeholder="مثال: شهادة حضور مؤتمر" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">القسم *</label>
+          <select id="newFileCategory" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200">
+            <option value="personal_id">وثائق شخصية ورسمية</option>
+            <option value="work_docs">ملفات العمل والقرارات</option>
+            <option value="courses">الشهادات والدورات</option>
+            <option value="academic">الجامعة والأرشيف</option>
+            <option value="family">وثائق الأسرة</option>
+            <option value="real_estate">العقارات</option>
+            <option value="finance">المالية والفواتير</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">رابط الملف في قوقل درايف *</label>
+          <input id="newFileUrl" type="url" required dir="ltr" placeholder="https://drive.google.com/file/d/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div class="pt-2 flex items-center justify-end gap-2">
+          <button id="btnCancelAddFile" type="button" class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 text-xs font-bold">إلغاء</button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-black">حفظ وإضافة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 -translate-y-3">
+    <div class="bg-slate-900 dark:bg-emerald-600 text-white px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-bold">
+      <i class="fa-solid fa-circle-check"></i>
+      <span id="toastMessage">تمت العملية بنجاح</span>
+    </div>
+  </div>
+
+  <script>
+    const CORRECT_PIN = "1407"; // الرمز السري المعتمد
+
+    const CATEGORIES = [
+      { key: 'all', label: 'جميع الملفات', icon: 'fa-layer-group' },
+      { key: 'favorites', label: 'المفضلة ⭐', icon: 'fa-star' },
+      { key: 'personal_id', label: 'وثائق شخصية ورسمية', icon: 'fa-id-card' },
+      { key: 'work_docs', label: 'ملفات العمل', icon: 'fa-briefcase' },
+      { key: 'courses', label: 'الدورات', icon: 'fa-certificate' },
+      { key: 'academic', label: 'الجامعة والأرشيف', icon: 'fa-user-graduate' },
+      { key: 'family', label: 'الأسرة', icon: 'fa-people-roof' },
+      { key: 'real_estate', label: 'العقارات', icon: 'fa-building' },
+      { key: 'finance', label: 'المالية', icon: 'fa-wallet' }
+    ];
+
+    let filesData = [
+      // 1. وثائق شخصية ورسمية
+      { id: '1GlmTx0RLnrfvuPjJ8YaXQDT-6CMh00q_', title: 'الهوية الوطنية (الرسمية)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-28', pinned: true, tags: 'هوية وطنية' },
+      { id: '1BRwWSn7iSGCb-ULYe4A-AtwXn0_6S4qo', title: 'الهوية الوطنية — نسخة توكلنا', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-14', pinned: false, tags: 'توكلنا' },
+      { id: '1g5h1C_0Bv17iew06clOVS8aL_SSdj9Bt', title: 'جواز السفر (صالح حتى 2031)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-30', pinned: true, tags: 'جواز سفر' },
+      { id: '1WaqClU61Mwof2BWDoW42OHacT1-nP6z7', title: 'رخصة القيادة', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-10-14', pinned: true, tags: 'رخصة قيادة' },
+      { id: '1EeKN4lm2FRLl58yIhvotmSqb3IVGYZ5T', title: 'السيرة الذاتية الجديدة (CV)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-21', pinned: true, tags: 'سيرة ذاتية' },
+      { id: '1VoGsrgK48Dw4OH5PsjaXcB7twEmbQSMJ', title: 'بطاقة تصنيف هيئة التخصصات الصحية', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-28', pinned: true, tags: 'هيئة التخصصات الصحية' },
+      { id: '187zQdgOmEHcwmMrEpS6cbxQ6pbsS4Tu9', title: 'وثيقة التخرج — إدارة مستشفيات', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-23', pinned: true, tags: 'وثيقة تخرج' },
+      { id: '1OYEtyCBfC-NEDfNKBfBw1Ue1C0DbchMg', title: 'كشف الدرجات الأكاديمي', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-23', pinned: false, tags: 'كشف درجات' },
+      { id: '1R6jTVSzTGDDQ_PRrLKx2sF-TzMfSx0mA', title: 'شهادة الإنعاش القلبي الرئوي (BLS)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-30', pinned: true, tags: 'bls' },
+      { id: '1WDAVVVtfBABCLJqQxZqiopjiJlTEpE-C', title: 'شهادة رخصة مهارات مكافحة العدوى (BICSL)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-23', pinned: true, tags: 'بكسل bicsl' },
+
+      // 2. ملفات العمل والقرارات
+      { id: '15a9VV8-hh7bPqO7khu-uiLUWK-rEyfSb', title: 'وثيقة تأمين الأخطاء الطبية', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-10-27', pinned: true, tags: 'تأمين أخطاء طبية' },
+      { id: '1yW84NAmQqjFKOdlLmUTVKJdu2FPEHFe6', title: 'إقرار صرف بدل النفسية 2026', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-10-04', pinned: true, tags: 'بدل نفسي' },
+      { id: '1evzh8eIVqr9Ie8TouFBLGodIQtiPQfhB', title: 'قرار التعيين الرسمي', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-09-30', pinned: true, tags: 'قرار التعيين' },
+      { id: '1Ze1ma3iWHKwiJWOvy0oBYH4LukxIjv8Y', title: 'خطاب مباشرة العمل', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'مباشرة العمل' },
+      { id: '16IHoGVbauwJlXVqvNa6HYa1NbKvF9RMo', title: 'عقد العمل الرسمي', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-09-21', pinned: false, tags: 'عقد العمل' },
+      { id: '1iBEuj47jhEoHrIXnAG4dsEQNxbAnu8MW', title: 'شهادة الخبرة من التجمع الصحي', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2025-06-11', pinned: true, tags: 'شهادة خبرة' },
+
+      // 3. الشهادات والدورات
+      { id: '1JIlAzQTV_4siuOGnpTZ3wHM95DAAngGk', title: 'شهادة دورة التحول الوطني', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'دورة التحول الوطني' },
+      { id: '1OpuppgkVwC8ZqBwTUabdIup57iGxHMJN', title: 'شهادة دورة Code Red', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'code red' },
+
+      // 4. الجامعة والأرشيف
+      { id: '1IuhqV026tNjYslPXnQa-ENojU1L6nBL0', title: 'ملف مدمج: درجات + هوية + وثيقة', category: 'academic', folderName: 'جامعة الملك عبدالعزيز', type: 'pdf', date: '2026-09-21', pinned: true, tags: 'ملف مدمج' },
+      { id: '10VKi_8_r1KLY3vASbgWGCfRsJA8le98C', title: 'تصنيف صيدلة + إدارة مستشفيات', category: 'academic', folderName: 'جامعة الملك عبدالعزيز', type: 'pdf', date: '2026-09-21', pinned: false, tags: 'تصنيف صيدلة' },
+
+      // 5. الأسرة
+      { id: '1X3FLCX0nOWRqyJCvkYXLNxWYTEmNQ0i0', title: 'سجل الأسرة (كرت العائلة)', category: 'family', folderName: '04 - الأسرة', type: 'image', date: '2026-09-24', pinned: true, tags: 'كرت العائلة' },
+      { id: '1WOTjBLj_-yYFtXW7uUaHKXoa_QdUhWTz', title: 'صك الوكالة الشرعية من الوالدة', category: 'family', folderName: '04 - الأسرة', type: 'pdf', date: '2026-10-03', pinned: true, tags: 'وكالة الوالدة' },
+
+      // 6. العقارات
+      { id: '16cDerV-5gi5yWtsckaezmMJ1Q38-PVNj', title: 'صك إلكتروني — بيت العمال', category: 'real_estate', folderName: '08 - عقارات', type: 'pdf', date: '2026-10-01', pinned: true, tags: 'صك بيت العمال' },
+      { id: '1v05bRNXRsgD_dUHyV1tahVgTn15zI13-', title: 'صك إلكتروني — بيت الدويمة', category: 'real_estate', folderName: '08 - عقارات', type: 'pdf', date: '2026-10-01', pinned: true, tags: 'صك الدويمة' },
+      { id: '1TMiGcd00zCQJStrDMXUSvv8piGfC2KNE', title: 'السجل التجاري — مغاسل روما الذهبية', category: 'real_estate', folderName: 'مغاسل روما', type: 'image', date: '2026-10-19', pinned: true, tags: 'مغاسل روما السجل التجاري' },
+
+      // 7. المالية
+      { id: '1EsvnHUfGd2eApjbJgk_2o5N0ydWF8s0N', title: 'شهادة آيبان مصرف الراجحي الأساسي', category: 'finance', folderName: '03 - مالية', type: 'pdf', date: '2026-10-04', pinned: true, tags: 'ايبان الراجحي' }
+    ];
+
+    let state = { searchQuery: '', activeCategory: 'all' };
+
+    function checkPin(e) {
+      e.preventDefault();
+      const val = document.getElementById('pinInput').value;
+      if (val === CORRECT_PIN) {
+        document.getElementById('lockScreen').classList.add('hidden');
+        localStorage.setItem('portal_unlocked', 'true');
+      } else {
+        document.getElementById('lockError').classList.remove('hidden');
+      }
+    }
+
+    function initApp() {
+      if (localStorage.getItem('portal_unlocked') === 'true') {
+        document.getElementById('lockScreen').classList.add('hidden');
+      }
+      document.getElementById('lockForm').addEventListener('submit', checkPin);
+      document.getElementById('btnLockPortal').addEventListener('click', () => {
+        localStorage.removeItem('portal_unlocked');
+        document.getElementById('lockScreen').classList.remove('hidden');
+      });
+
+      renderCategories();
+      renderFiles();
+
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        document.getElementById('btnClearSearch').classList.toggle('hidden', !state.searchQuery);
+        renderFiles();
+      });
+
+      document.getElementById('btnClearSearch').addEventListener('click', () => {
+        state.searchQuery = '';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('btnClearSearch').classList.add('hidden');
+        renderFiles();
+      });
+
+      const modal = document.getElementById('addFileModal');
+      document.getElementById('btnOpenAddModal').addEventListener('click', () => modal.classList.remove('hidden'));
+      document.getElementById('btnCloseAddModal').addEventListener('click', () => modal.classList.add('hidden'));
+      document.getElementById('btnCancelAddFile').addEventListener('click', () => modal.classList.add('hidden'));
+      
+      document.getElementById('addFileForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('newFileTitle').value;
+        const category = document.getElementById('newFileCategory').value;
+        const url = document.getElementById('newFileUrl').value;
+        const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/) || url.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+        const id = idMatch ? idMatch[1] : ('custom_' + Date.now());
+
+        filesData.unshift({ id, title, category, folderName: 'إضافة جديدة', type: 'pdf', date: new Date().toISOString().slice(0,10), pinned: true, tags: title, customUrl: idMatch ? null : url });
+        modal.classList.add('hidden');
+        renderFiles();
+        showToast('تمت الإضافة بنجاح');
+      });
+    }
+
+    function renderCategories() {
+      document.getElementById('categoryTabsContainer').innerHTML = CATEGORIES.map(c => `
+        <button type="button" onclick="setCategory('${c.key}')" class="shrink-0 inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold border transition ${state.activeCategory === c.key ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700'}">
+          <i class="fa-solid ${c.icon}"></i>
+          <span>${c.label}</span>
+        </button>
+      `).join('');
+    }
+
+    window.setCategory = function(key) {
+      state.activeCategory = key;
+      renderCategories();
+      renderFiles();
+    }
+
+    function renderFiles() {
+      const q = state.searchQuery.toLowerCase();
+      const filtered = filesData.filter(f => {
+        if (state.activeCategory === 'favorites' && !f.pinned) return false;
+        if (state.activeCategory !== 'all' && state.activeCategory !== 'favorites' && f.category !== state.activeCategory) return false;
+        if (q && !f.title.toLowerCase().includes(q) && !f.tags.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      document.getElementById('resultsCountBadge').textContent = filtered.length + ' مستند';
+      const container = document.getElementById('filesContainer');
+      const empty = document.getElementById('emptyStateContainer');
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+
+      container.className = 'grid grid-cols-1 sm:grid-cols-2 gap-3.5';
+      container.innerHTML = filtered.map(f => {
+        const viewUrl = f.customUrl || ('https://drive.google.com/file/d/' + f.id + '/view?usp=drivesdk');
+        return `
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm flex flex-col justify-between gap-3 card-hover">
+            <div>
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-10 h-10 rounded-2xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-file-pdf"></i>
+                  </div>
+                  <div>
+                    <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                      ${f.folderName}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white mt-3 line-clamp-2">${f.title}</h3>
+            </div>
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2">
+              <a href="${viewUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition shadow-sm">
+                <i class="fa-brands fa-google-drive text-sm"></i>
+                <span>فتح ومشاركة من درايف</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toastContainer');
+      document.getElementById('toastMessage').textContent = msg;
+      t.classList.remove('opacity-0', '-translate-y-3');
+      setTimeout(() => t.classList.add('opacity-0', '-translate-y-3'), 2500);
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>

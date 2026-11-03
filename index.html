@@ -23,7 +23,7 @@
   </script>
   <style>
     body { font-family: 'Tajawal', 'Inter', sans-serif; }
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(148, 163, 184, 0.45); border-radius: 9999px; }
     .card-hover { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
     .card-hover:hover { transform: translateY(-2px); }
@@ -85,14 +85,9 @@
       </div>
 
       <div class="flex items-center gap-2 flex-wrap">
-        <button id="btnOpenFoldersModal" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition border border-slate-200 dark:border-slate-700">
-          <i class="fa-solid fa-folder-tree text-amber-500"></i>
-          <span>مجلدات درايف</span>
-        </button>
-
         <button id="btnOpenAddModal" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-sm">
           <i class="fa-solid fa-plus"></i>
-          <span>إضافة</span>
+          <span>إضافة ملف</span>
         </button>
 
         <button id="btnLockPortal" type="button" class="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60 flex items-center justify-center text-sm transition" title="قفل البوابة">
@@ -106,70 +101,91 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 space-y-5 pb-28">
+  <!-- Main Layout with Right Sidebar for Folders -->
+  <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 flex flex-col lg:flex-row gap-6 flex-1">
+    
+    <!-- Left/Main Content Area -->
+    <main class="flex-1 space-y-5 pb-28 min-w-0">
 
-    <!-- Search Section -->
-    <section class="bg-white dark:bg-slate-900 rounded-3xl border-2 border-emerald-500/30 dark:border-emerald-500/20 p-5 sm:p-7 shadow-md space-y-4">
-      <div class="text-center max-w-xl mx-auto space-y-1">
-        <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">ابحث عن مستندك أو عاينه فوراً</h2>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">ابحث بالاسم، أو تصفح عبر الأقسام والمجلدات أدناه</p>
+      <!-- Search Section -->
+      <section class="bg-white dark:bg-slate-900 rounded-3xl border-2 border-emerald-500/30 dark:border-emerald-500/20 p-5 sm:p-7 shadow-md space-y-4">
+        <div class="text-center max-w-xl mx-auto space-y-1">
+          <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">ابحث عن مستندك أو عاينه فوراً</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">ابحث بالاسم، أو تصفح عبر الأقسام والمجلدات</p>
+        </div>
+
+        <div class="relative max-w-3xl mx-auto">
+          <i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-emerald-600 dark:text-emerald-400 text-lg sm:text-xl pointer-events-none"></i>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="ابحث هنا عن أي ملف من الـ 68 مستنداً..."
+            class="w-full pr-14 pl-24 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-base sm:text-lg font-bold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900 transition shadow-inner"
+          >
+          <button
+            id="btnClearSearch"
+            type="button"
+            class="hidden absolute left-3.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-300 hover:bg-rose-200 text-xs font-extrabold transition"
+          >
+            مسح
+          </button>
+        </div>
+
+        <!-- Quick Search Tags -->
+        <div class="flex items-center justify-center gap-1.5 flex-wrap pt-1 max-w-3xl mx-auto">
+          <span class="text-xs font-bold text-slate-400 ml-1">الأكثر طلباً:</span>
+          <button type="button" data-quick-tag="الهوية" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الهوية</button>
+          <button type="button" data-quick-tag="جواز" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">جواز السفر</button>
+          <button type="button" data-quick-tag="السيرة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">السيرة الذاتية</button>
+          <button type="button" data-quick-tag="العائلة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">كرت العائلة</button>
+          <button type="button" data-quick-tag="ايبان" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">آيبان الراجحي</button>
+          <button type="button" data-quick-tag="صك" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الصكوك</button>
+        </div>
+
+        <div id="categoryTabsContainer" class="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1 pt-3 border-t border-slate-100 dark:border-slate-800"></div>
+      </section>
+
+      <!-- Results Header -->
+      <div class="flex items-center justify-between px-1">
+        <div class="flex items-center gap-2">
+          <h2 id="currentCategoryTitle" class="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">جميع الملفات الشخصية</h2>
+          <span id="resultsCountBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">0 مستند</span>
+        </div>
       </div>
 
-      <div class="relative max-w-3xl mx-auto">
-        <i class="fa-solid fa-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-emerald-600 dark:text-emerald-400 text-lg sm:text-xl pointer-events-none"></i>
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="ابحث هنا عن أي ملف من الـ 68 مستنداً..."
-          class="w-full pr-14 pl-24 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-base sm:text-lg font-bold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900 transition shadow-inner"
-        >
-        <button
-          id="btnClearSearch"
-          type="button"
-          class="hidden absolute left-3.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-300 hover:bg-rose-200 text-xs font-extrabold transition"
-        >
-          مسح
+      <!-- Files Container -->
+      <section id="filesContainer"></section>
+
+      <!-- Empty State -->
+      <section id="emptyStateContainer" class="hidden bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-10 text-center space-y-3">
+        <div class="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center text-2xl mx-auto">
+          <i class="fa-solid fa-file-circle-question"></i>
+        </div>
+        <h3 class="text-base font-extrabold text-slate-800 dark:text-slate-100">لا توجد مستندات مطابقة للبحث</h3>
+        <button id="btnResetFilters" type="button" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-sm">
+          <span>عرض جميع المستندات</span>
         </button>
+      </section>
+
+    </main>
+
+    <!-- Right Sidebar: Drive Folders (11 Folders) -->
+    <aside class="w-full lg:w-80 shrink-0 space-y-3">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm sticky top-20">
+        <div class="flex items-center gap-2.5 pb-3 border-b border-slate-100 dark:border-slate-800 mb-3">
+          <div class="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center text-base">
+            <i class="fa-solid fa-folder-tree"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-slate-900 dark:text-white">مجلدات درايف (11 مجلداً)</h3>
+            <p class="text-[11px] text-slate-500">انتقال مباشر للمجلد في الدرايف</p>
+          </div>
+        </div>
+        <div id="foldersSidebarContainer" class="space-y-2 max-h-[72vh] overflow-y-auto custom-scrollbar pr-1"></div>
       </div>
+    </aside>
 
-      <!-- Quick Search Tags -->
-      <div class="flex items-center justify-center gap-1.5 flex-wrap pt-1 max-w-3xl mx-auto">
-        <span class="text-xs font-bold text-slate-400 ml-1">الأكثر طلباً:</span>
-        <button type="button" data-quick-tag="الهوية" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الهوية</button>
-        <button type="button" data-quick-tag="جواز" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">جواز السفر</button>
-        <button type="button" data-quick-tag="السيرة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">السيرة الذاتية</button>
-        <button type="button" data-quick-tag="العائلة" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">كرت العائلة</button>
-        <button type="button" data-quick-tag="ايبان" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">آيبان الراجحي</button>
-        <button type="button" data-quick-tag="صك" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الصكوك</button>
-      </div>
-
-      <div id="categoryTabsContainer" class="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1 pt-3 border-t border-slate-100 dark:border-slate-800"></div>
-    </section>
-
-    <!-- Results Header -->
-    <div class="flex items-center justify-between px-1">
-      <div class="flex items-center gap-2">
-        <h2 id="currentCategoryTitle" class="text-sm sm:text-base font-extrabold text-slate-800 dark:text-slate-100">جميع الملفات الشخصية</h2>
-        <span id="resultsCountBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">0 مستند</span>
-      </div>
-    </div>
-
-    <!-- Files Container -->
-    <section id="filesContainer"></section>
-
-    <!-- Empty State -->
-    <section id="emptyStateContainer" class="hidden bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-10 text-center space-y-3">
-      <div class="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center text-2xl mx-auto">
-        <i class="fa-solid fa-file-circle-question"></i>
-      </div>
-      <h3 class="text-base font-extrabold text-slate-800 dark:text-slate-100">لا توجد مستندات مطابقة للبحث</h3>
-      <button id="btnResetFilters" type="button" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-sm">
-        <span>عرض جميع المستندات</span>
-      </button>
-    </section>
-
-  </main>
+  </div>
 
   <!-- Modal 1: In-Page Document Preview Modal -->
   <div id="previewModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
@@ -194,28 +210,7 @@
     </div>
   </div>
 
-  <!-- Modal 2: Drive Folders Quick Access Modal -->
-  <div id="foldersModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
-      <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-amber-100 dark:bg-amber-950/70 text-amber-600 flex items-center justify-center text-lg">
-            <i class="fa-solid fa-folder-open"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-black text-slate-900 dark:text-white">مجلدات قوقل درايف الرئيسية (11 مجلداً)</h3>
-            <p class="text-xs text-slate-500">تصفح أو افتح أي مجلد رئيسي مباشرة في درايف</p>
-          </div>
-        </div>
-        <button id="btnCloseFoldersModal" type="button" class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white flex items-center justify-center text-slate-500">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div id="foldersListContainer" class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[70vh] overflow-y-auto custom-scrollbar"></div>
-    </div>
-  </div>
-
-  <!-- Modal 3: Add New Custom Document Modal -->
+  <!-- Modal 2: Add New Custom Document Modal -->
   <div id="addFileModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
       <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -418,7 +413,7 @@
 
       renderCategories();
       renderFiles();
-      renderFoldersList();
+      renderFoldersSidebar();
 
       document.getElementById('searchInput').addEventListener('input', (e) => {
         state.searchQuery = e.target.value;
@@ -438,10 +433,6 @@
       document.getElementById('btnOpenAddModal').addEventListener('click', () => addModal.classList.remove('hidden'));
       document.getElementById('btnCloseAddModal').addEventListener('click', () => addModal.classList.add('hidden'));
       document.getElementById('btnCancelAddFile').addEventListener('click', () => addModal.classList.add('hidden'));
-
-      const foldersModal = document.getElementById('foldersModal');
-      document.getElementById('btnOpenFoldersModal').addEventListener('click', () => foldersModal.classList.remove('hidden'));
-      document.getElementById('btnCloseFoldersModal').addEventListener('click', () => foldersModal.classList.add('hidden'));
 
       document.getElementById('btnClosePreviewModal').addEventListener('click', () => {
         document.getElementById('previewModal').classList.add('hidden');
@@ -478,20 +469,19 @@
       renderFiles();
     }
 
-    function renderFoldersList() {
-      document.getElementById('foldersListContainer').innerHTML = DRIVE_FOLDERS.map(f => `
-        <div class="p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-3 min-w-0">
-            <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center shrink-0">
+    function renderFoldersSidebar() {
+      document.getElementById('foldersSidebarContainer').innerHTML = DRIVE_FOLDERS.map(f => `
+        <div class="p-2.5 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 hover:border-emerald-500/50 flex items-center justify-between gap-2 transition">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-8 h-8 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center text-xs shrink-0">
               <i class="fa-solid ${f.icon}"></i>
             </div>
             <div class="min-w-0">
-              <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white truncate">${f.title}</h4>
-              <p class="text-[11px] text-slate-500">${f.category}</p>
+              <h4 class="text-xs font-extrabold text-slate-900 dark:text-white truncate">${f.title}</h4>
             </div>
           </div>
-          <a href="https://drive.google.com/drive/folders/${f.id}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold shrink-0">
-            فتح المجلد
+          <a href="https://drive.google.com/drive/folders/${f.id}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold shrink-0 transition">
+            فتح
           </a>
         </div>
       `).join('');

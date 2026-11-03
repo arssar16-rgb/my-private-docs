@@ -101,10 +101,10 @@
     </div>
   </header>
 
-  <!-- Main Layout with Right Sidebar for Folders -->
-  <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 flex flex-col lg:flex-row gap-6 flex-1">
+  <!-- Main Layout: Right Sidebar for Folders & Categories, Left/Main for Files -->
+  <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 flex flex-col lg:flex-row-reverse gap-6 flex-1">
     
-    <!-- Left/Main Content Area -->
+    <!-- Main Content Area (Left side) -->
     <main class="flex-1 space-y-5 pb-28 min-w-0">
 
       <!-- Search Section -->
@@ -141,8 +141,6 @@
           <button type="button" data-quick-tag="ايبان" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">آيبان الراجحي</button>
           <button type="button" data-quick-tag="صك" class="quick-tag-btn px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-xs font-bold text-slate-600 dark:text-slate-300 transition">الصكوك</button>
         </div>
-
-        <div id="categoryTabsContainer" class="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1 pt-3 border-t border-slate-100 dark:border-slate-800"></div>
       </section>
 
       <!-- Results Header -->
@@ -169,9 +167,25 @@
 
     </main>
 
-    <!-- Right Sidebar: Drive Folders (11 Folders) -->
-    <aside class="w-full lg:w-80 shrink-0 space-y-3">
-      <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm sticky top-20">
+    <!-- Right Sidebar: Folders & Categories Selection Hub -->
+    <aside class="w-full lg:w-80 shrink-0 space-y-4">
+      
+      <!-- Categories Filter Card -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
+        <div class="flex items-center gap-2.5 pb-3 border-b border-slate-100 dark:border-slate-800 mb-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-base">
+            <i class="fa-solid fa-filter"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-slate-900 dark:text-white">التصنيفات الرئيسية</h3>
+            <p class="text-[11px] text-slate-500">اختر القسم لعرض مستنداته</p>
+          </div>
+        </div>
+        <div id="categoryTabsContainer" class="space-y-1.5"></div>
+      </div>
+
+      <!-- Drive Folders Card -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
         <div class="flex items-center gap-2.5 pb-3 border-b border-slate-100 dark:border-slate-800 mb-3">
           <div class="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center text-base">
             <i class="fa-solid fa-folder-tree"></i>
@@ -181,8 +195,9 @@
             <p class="text-[11px] text-slate-500">انتقال مباشر للمجلد في الدرايف</p>
           </div>
         </div>
-        <div id="foldersSidebarContainer" class="space-y-2 max-h-[72vh] overflow-y-auto custom-scrollbar pr-1"></div>
+        <div id="foldersSidebarContainer" class="space-y-2 max-h-[50vh] overflow-y-auto custom-scrollbar pr-1"></div>
       </div>
+
     </aside>
 
   </div>
@@ -283,7 +298,6 @@
     ];
 
     let filesData = [
-      // 1. وثائق شخصية ورسمية (02 - شخصي)
       { id: '1GlmTx0RLnrfvuPjJ8YaXQDT-6CMh00q_', title: 'الهوية الوطنية (الرسمية)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-28', pinned: true, tags: 'هوية وطنية بطاقة احوال مدنية عبدالعزيز صالح العمري' },
       { id: '1BRwWSn7iSGCb-ULYe4A-AtwXn0_6S4qo', title: 'الهوية الوطنية — نسخة توكلنا', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-14', pinned: false, tags: 'هوية وطنية توكلنا بطاقة رقمية' },
       { id: '1g5h1C_0Bv17iew06clOVS8aL_SSdj9Bt', title: 'جواز السفر (صالح حتى 2031)', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-30', pinned: true, tags: 'جواز سفر passport 2031 سفر' },
@@ -294,8 +308,6 @@
       { id: '1OYEtyCBfC-NEDfNKBfBw1Ue1C0DbchMg', title: 'كشف الدرجات الأكاديمي — إدارة مستشفيات', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-23', pinned: false, tags: 'كشف درجات سجل اكاديمي ادارة مستشفيات معدل' },
       { id: '1R6jTVSzTGDDQ_PRrLKx2sF-TzMfSx0mA', title: 'شهادة الإنعاش القلبي الرئوي (BLS) — صالحة حتى 3/2027', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-30', pinned: true, tags: 'شهادة bls انعاش قلبي رئوي 2027' },
       { id: '1WDAVVVtfBABCLJqQxZqiopjiJlTEpE-C', title: 'شهادة رخصة مهارات مكافحة العدوى (BICSL) 2026', category: 'personal_id', folderName: '02 - شخصي', type: 'pdf', date: '2026-09-23', pinned: true, tags: 'شهادة بكسل bicsl مكافحة العدوى 2026 2027' },
-
-      // 2. ملفات العمل والقرارات (شخصي_العمل)
       { id: '15a9VV8-hh7bPqO7khu-uiLUWK-rEyfSb', title: 'وثيقة تأمين الأخطاء الطبية (2026 - 2029 / 3 سنوات)', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-10-27', pinned: true, tags: 'تامين الاخطاء الطبيه وثيقة اتحاد الخليج ممارس صحي' },
       { id: '1yW84NAmQqjFKOdlLmUTVKJdu2FPEHFe6', title: 'إقرار صرف بدل النفسية 2026 (معتمد)', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-10-04', pinned: true, tags: 'اقرار بدل نفسي النفسية 2026 مدينة الملك سلمان الطبية' },
       { id: '1M87G9XvyOk9gJcHCG8ak0iRj00uvScWe', title: 'إقرار بدل نفسي (نسخة سابقة)', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-09-23', pinned: false, tags: 'اقرار بدل نفسي مستشفى الطب النفسي' },
@@ -316,8 +328,6 @@
       { id: '1k6mcHZBfnhp7qIF51Hv5ZCNhakqIYaUJ', title: 'شهادة التطوع الصحي 2025', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2025-09-01', pinned: false, tags: 'التطوع الصحي 2025 ساعات تطوعية' },
       { id: '1rqvDOl2-eZxaGw1GefRLvhzaQ2jHAcuw', title: 'شهادة حضور دورة الليثيوم', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2022-08-10', pinned: false, tags: 'شهادة حضور دورة الليثيوم صيدلة' },
       { id: '18Dy2ApWg6qK5WnTAURCCxPVFUgqoUuL9', title: 'مستند حسم غياب 1447', category: 'work_docs', folderName: 'شخصي_العمل', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'حسم غياب 1447' },
-
-      // 3. الشهادات والدورات (الدورات)
       { id: '1JIlAzQTV_4siuOGnpTZ3wHM95DAAngGk', title: 'شهادة دورة التحول الوطني', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'دورة التحول الوطني رؤية 2030 شهادة' },
       { id: '1OpuppgkVwC8ZqBwTUabdIup57iGxHMJN', title: 'شهادة دورة Code Red (10-2025)', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'دورة code red الشفرة الحمراء 2025' },
       { id: '11EfQgUxMGCh_NVVup0XlpRuIlsYf3TOi', title: 'شهادة دورة تدريبية (11-2024)', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'دورة تدريبية نوفمبر 2024' },
@@ -327,8 +337,6 @@
       { id: '1gtDyAwdqj4wGL6UEqcsvx9y8O8r6FlMG', title: 'شهادة دورة تدريبية (12-2022)', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'دورة تدريبية ديسمبر 2022' },
       { id: '1QFzfxaf8QS5IODOkARwutd-VPNMFmYKn', title: 'شهادة دورة تدريبية (8-2022)', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'دورة تدريبية اغسطس 2022' },
       { id: '1pT_M5NpcP3faw6szPfL5ZQzyfZ9Ya1yO', title: 'شهادة دورة تدريبية (8-2021)', category: 'courses', folderName: 'الدورات', type: 'pdf', date: '2026-09-30', pinned: false, tags: 'دورة تدريبية اغسطس 2021' },
-
-      // 4. الجامعة والتصنيف والأرشيف
       { id: '1IuhqV026tNjYslPXnQa-ENojU1L6nBL0', title: 'ملف مدمج: كشف درجات + الهوية + وثيقة إدارة مستشفيات', category: 'academic', folderName: 'جامعة الملك عبدالعزيز', type: 'pdf', date: '2026-09-21', pinned: true, tags: 'ملف مدمج كشف درجات احوال وثيقة ادارة مستشفيات جامعة الملك عبدالعزيز' },
       { id: '10VKi_8_r1KLY3vASbgWGCfRsJA8le98C', title: 'تصنيف صيدلة + إدارة مستشفيات (PDF)', category: 'academic', folderName: 'جامعة الملك عبدالعزيز', type: 'pdf', date: '2026-09-21', pinned: false, tags: 'تصنيف صيدلة ادارة مستشفيات هيئة التخصصات' },
       { id: '1w8DyIbuHWzLkoMKxWbtDh-kuidj7AE-7', title: 'طبق الأصل — كشف درجات جامعة الملك عبدالعزيز', category: 'academic', folderName: 'جامعة الملك عبدالعزيز', type: 'pdf', date: '2025-01-02', pinned: false, tags: 'طبق الاصل كشف درجات جامعة الملك عبدالعزيز' },
@@ -340,8 +348,6 @@
       { id: '1yq0Wm2jzCfCp4TXxRH_ZVOCmxDEdlkxj', title: 'توصية علمية — إدارة مستشفيات (3)', category: 'academic', folderName: 'جامعة الملك عبدالعزيز', type: 'pdf', date: '2025-06-11', pinned: false, tags: 'توصية علمية اكاديمية ادارة مستشفيات ماجستير' },
       { id: '1xLtFMRRS-G3DXbzoSFI2rPBJWE1qvpKP', title: 'قرار تعويض إجازة عيد الفطر 1443 (24 يوم)', category: 'academic', folderName: 'تعويضات الأعياد', type: 'pdf', date: '2026-10-03', pinned: false, tags: 'تعويض اجازة عيد الفطر 1443 مرابطة' },
       { id: '1ZPXLTQne4K0aI0NZil_W4U6VweAuR6EE', title: 'قرار تعويض إجازة عيد الأضحى 1444 (11 يوم)', category: 'academic', folderName: 'تعويضات الأعياد', type: 'pdf', date: '2026-10-03', pinned: false, tags: 'تعويض اجازة عيد الاضحى 1444 مرابطة' },
-
-      // 5. وثائق الأسرة والوكالات (04 - الأسرة)
       { id: '1X3FLCX0nOWRqyJCvkYXLNxWYTEmNQ0i0', title: 'سجل الأسرة (كرت العائلة)', category: 'family', folderName: '04 - الأسرة', type: 'image', date: '2026-09-24', pinned: true, tags: 'كرت العائلة سجل الاسرة احوال مدنية' },
       { id: '1zToK4-0X_3uBxW7T8X0XmtG1D804g8Mc', title: 'برنت أبشر', category: 'family', folderName: '04 - الأسرة', type: 'image', date: '2026-10-21', pinned: false, tags: 'برنت ابشر بيانات الاحوال' },
       { id: '1we0YY_4rj3TtUuUAdUqjmTakP7Dh33FR', title: 'شهادة الميلاد — عبدالعزيز', category: 'family', folderName: '04 - الأسرة', type: 'image', date: '2026-09-24', pinned: false, tags: 'شهادة ميلاد عبدالعزيز' },
@@ -359,8 +365,6 @@
       { id: '1dyGxYBx5Vyw7sBZ3LFCWlxqN3w12z_pi', title: 'تقرير إثبات خروج نهائي — العاملة الأولى', category: 'family', folderName: '04 - الأسرة', type: 'pdf', date: '2026-10-14', pinned: false, tags: 'تقرير اثبات خروج نهائي العاملة الاولى جوازات ابشر' },
       { id: '1xRtJ3Kf6EyqC45-WdnWesCihytScC3ge', title: 'وثيقة تأمين الجزيرة تكافل — العاملة', category: 'family', folderName: '04 - الأسرة', type: 'pdf', date: '2026-10-04', pinned: false, tags: 'تامين الجزيرة تكافل العاملة' },
       { id: '1f6GDAq9pwrQq_HaBvnzRZKCLO834tEFi', title: 'تقرير انقطاع عن العمل — منصة مساند', category: 'family', folderName: '04 - الأسرة', type: 'pdf', date: '2026-10-04', pinned: false, tags: 'مساند تقرير انقطاع عن العمل عاملة' },
-
-      // 6. العقارات ومغاسل روما (08 - عقارات)
       { id: '16cDerV-5gi5yWtsckaezmMJ1Q38-PVNj', title: 'صك إلكتروني — بيت العمال', category: 'real_estate', folderName: '08 - عقارات', type: 'pdf', date: '2026-10-01', pinned: true, tags: 'صك الكتروني بيت العمال عقار' },
       { id: '1v05bRNXRsgD_dUHyV1tahVgTn15zI13-', title: 'صك إلكتروني — بيت الدويمة', category: 'real_estate', folderName: '08 - عقارات', type: 'pdf', date: '2026-10-01', pinned: true, tags: 'صك الكتروني بيت الدويمه عقار' },
       { id: '1SrQNsGw8yK_vDQjO61vFSJnbYCqQLnY1', title: 'صك عمارة شوران', category: 'real_estate', folderName: '08 - عقارات', type: 'image', date: '2026-09-24', pinned: true, tags: 'صك عمارة شوران عقار' },
@@ -375,8 +379,6 @@
       { id: '1FN2n3FIfQhIHn52GuBd-Kn2s8y_IBuHK', title: 'رخصة الإنشاء — شوران', category: 'real_estate', folderName: 'مغاسل روما الذهبية شوران', type: 'image', date: '2026-10-19', pinned: false, tags: 'رخصة الانشاء شوران بلدية' },
       { id: '1m-GjKjduA4jXAj-sfqRugt1XPIpvhS6y', title: 'نموذج اللوحة الإرشادية المعتمدة — مغاسل روما', category: 'real_estate', folderName: 'مغاسل روما الذهبية شوران', type: 'pdf', date: '2026-10-25', pinned: false, tags: 'نموذج اللوحة الارشادية المعتمدة لوحتي مغاسل روما' },
       { id: '1TFZ01GZnp_EddYfinbPh4ENZuqR1_NC3', title: 'العنوان الوطني — مغاسل روما', category: 'real_estate', folderName: 'مغاسل روما الذهبية شوران', type: 'image', date: '2026-10-19', pinned: false, tags: 'العنوان الوطني مغاسل روما شوران' },
-
-      // 7. المالية والمشاريع والفواتير
       { id: '1EsvnHUfGd2eApjbJgk_2o5N0ydWF8s0N', title: 'شهادة آيبان مصرف الراجحي الأساسي (IBAN)', category: 'finance', folderName: '03 - مالية', type: 'pdf', date: '2026-10-04', pinned: true, tags: 'ايبان الراجحي الاساسي iban رقم حساب بنك' },
       { id: '1KYS9u9WNMUh-Rqba6Vy5UNcQ2CBtVQy_', title: 'بطاقة أرقام حساباتي البنكية', category: 'finance', folderName: '03 - مالية', type: 'image', date: '2026-09-28', pinned: false, tags: 'ارقام حساباتي البنكية ايبان' },
       { id: '18yDvJM8CNXGSUzBNwq3t-WF04iZNhul3', title: 'رقم حساب الوالدة', category: 'finance', folderName: '03 - مالية', type: 'image', date: '2026-09-28', pinned: false, tags: 'رقم حساب امي الوالدة بنكي' },
@@ -411,6 +413,29 @@
         document.getElementById('lockScreen').classList.remove('hidden');
       });
 
+      // Dark Mode Toggle Logic
+      const themeToggleBtn = document.getElementById('btnThemeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeIcon.className = 'fa-solid fa-sun';
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeIcon.className = 'fa-solid fa-moon';
+      }
+
+      themeToggleBtn.addEventListener('click', () => {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+          themeIcon.className = 'fa-solid fa-moon';
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+          themeIcon.className = 'fa-solid fa-sun';
+        }
+      });
+
       renderCategories();
       renderFiles();
       renderFoldersSidebar();
@@ -426,6 +451,16 @@
         document.getElementById('searchInput').value = '';
         document.getElementById('btnClearSearch').classList.add('hidden');
         renderFiles();
+      });
+
+      document.querySelectorAll('.quick-tag-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tag = btn.getAttribute('data-quick-tag');
+          document.getElementById('searchInput').value = tag;
+          state.searchQuery = tag;
+          document.getElementById('btnClearSearch').classList.remove('hidden');
+          renderFiles();
+        });
       });
 
       // Modals
@@ -456,15 +491,21 @@
 
     function renderCategories() {
       document.getElementById('categoryTabsContainer').innerHTML = CATEGORIES.map(c => `
-        <button type="button" onclick="setCategory('${c.key}')" class="shrink-0 inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold border transition ${state.activeCategory === c.key ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700'}">
-          <i class="fa-solid ${c.icon}"></i>
-          <span>${c.label}</span>
+        <button type="button" onclick="setCategory('${c.key}')" class="w-full text-right flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-bold border transition ${state.activeCategory === c.key ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm' : 'bg-slate-50 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800'}">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid ${c.icon} text-sm"></i>
+            <span>${c.label}</span>
+          </div>
         </button>
       `).join('');
     }
 
     window.setCategory = function(key) {
       state.activeCategory = key;
+      const catObj = CATEGORIES.find(c => c.key === key);
+      if(catObj) {
+        document.getElementById('currentCategoryTitle').textContent = catObj.label;
+      }
       renderCategories();
       renderFiles();
     }
